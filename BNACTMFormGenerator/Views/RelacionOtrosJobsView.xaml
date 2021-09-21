@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="BNACTMFormGenerator.Views.RelacionOtrosJobsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
+             xmlns:vm="clr-namespace:BNACTMFormGenerator.ViewModel"
+             xmlns:vw="clr-namespace:BNACTMFormGenerator.Views"
+             xmlns:vml = "clr-namespace:BNACTMFormGenerator.VML"
+             vml:ViewModelLocator.AutoHookedUpViewModel = "True"
+             mc:Ignorable="d" Width="386" Height="500">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\MainWindowResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="El job debe ejecutarse si los siguentes jobs finalizaron exitosamente" FontWeight="Bold" />
+        <Label Grid.Column="0" Grid.Row="1" Content="Nombre Job Prod"/>
+        <Label Grid.Column="1" Grid.Row="1" Content="Nombre Job Test"/>
+        <ListBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding JobsEntrada}" SelectedItem="{Binding SelectedJobEntrada}" Height="100"/>
+        <Grid Grid.Column="3" Grid.Row="2" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0" Content="Agregar Job" Command="{Binding AddCommandJobEntrada}" VerticalAlignment="Top"/>
+            <Button Grid.Column="0" Grid.Row="1" Content="Borrar Job" Command="{Binding DeleteCommandJobEntrada}" VerticalAlignment="Top"/>
+        </Grid>
+        <TextBlock Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Text=" " FontWeight="Bold" />
+        <TextBlock Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3" Text="Si el job finaliza exitosamente le debe dejar condición a los siguientes jobs" FontWeight="Bold" />
+        <Label Grid.Column="0" Grid.Row="6" Content="Nombre Job Prod"/>
+        <Label Grid.Column="1" Grid.Row="6" Content="Nombre Job Test"/>
+        <ListBox Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" ItemsSource="{Binding JobsSalida}" SelectedItem="{Binding SelectedJobSalida}" Height="100"/>
+        <Grid Grid.Column="3" Grid.Row="7" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0" Content="Agregar Job" Command="{Binding AddCommandJobSalida}" />
+            <Button Grid.Column="1" Grid.Row="1" Content="Borrar Job" Command="{Binding DeleteCommandJobSalida}" />
+        </Grid>
+
+        <TextBlock Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="3" Text=" " FontWeight="Bold" />
+        <TextBlock Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="3" Text="El job no se podrá ejecutar en paralelo con los siguientes procesos" FontWeight="Bold" />
+        <Label Grid.Column="0" Grid.Row="10" Content="Nombre Job Prod"/>
+        <Label Grid.Column="1" Grid.Row="10" Content="Nombre Job Test"/>
+        <ListBox Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2" ItemsSource="{Binding JobsParalelos}" SelectedItem="{Binding SelectedJobParalelo}" Height="100"/>
+        <Grid Grid.Column="3" Grid.Row="11" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0" Content="Agregar Job" Command="{Binding AddCommandJobParalelo}" />
+            <Button Grid.Column="1" Grid.Row="1" Content="Borrar Job" Command="{Binding DeleteCommandJobParalelo}" />
+        </Grid>
+        
+        <Label Grid.Column="0" Grid.Row="12" Content="Aclaraciones:"/>
+        <TextBox Grid.Column="1" 
+                 Grid.Row="12" 
+                 Margin="4" 
+                 Grid.ColumnSpan="3" 
+                 Grid.RowSpan="2" 
+                 Text="{Binding Aclaraciones, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 HorizontalAlignment="Left"  
+                 Width="250" 
+                 Height="40" 
+                 TextWrapping="WrapWithOverflow" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}"/>
+    </Grid>
+</UserControl>

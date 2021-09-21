@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<FormularioCTM xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Fecha>25/06/2021</Fecha>
+  <NombreProcedimiento>Proceso para probar automatizacion</NombreProcedimiento>
+  <Usuario>n75644</Usuario>
+  <Area>Aplicativos Especiales - Sistemas, Organizacion y Sucursales</Area>
+  <Descr>ACA VA UNA DESCRIPCIÓN</Descr>
+  <Pasos>
+    <Paso xsi:type="PasoSP">
+      <tipoPaso>sql</tipoPaso>
+      <servidor>[SUX80CT0001 | SUX80AT0001]</servidor>
+      <nroPaso>1</nroPaso>
+      <baseDatos>SBLPRD</baseDatos>
+      <usuarioEjecucion>STAGING</usuarioEjecucion>
+      <storedProcedure>STG_CARGA_ALGO</storedProcedure>
+      <ParametrosSP>
+        <string>ARCHIVO.TXT</string>
+        <string>ARCHIVO1.TXT</string>
+        <string>ARCHIVO2.TXT</string>
+        <string>ARCHIVO3.TXT</string>
+        <string>ARCHIVO4.TXT</string>
+      </ParametrosSP>
+    </Paso>
+    <Paso xsi:type="PasoSQL">
+      <tipoPaso>sql</tipoPaso>
+      <servidor>[SUX80CT0001 | SUX80AT0001]</servidor>
+      <nroPaso>2</nroPaso>
+      <baseDatos>SBLPRD</baseDatos>
+      <usuarioEjecucion>STAGING</usuarioEjecucion>
+      <textoSQL>set echo on
+set termout on
+set serveroutput on
+whenever sqlerror exit sql.sqlcode
+
+UPDATE SIEBEL.S_SRV_REQ
+   SET CAMPO = CAMPO+1
+ WHERE CLAVE = '1234';
+exit </textoSQL>
+    </Paso>
+    <Paso xsi:type="PasoJob">
+      <tipoPaso>job</tipoPaso>
+      <servidor>[SUX80CT0001 | SUX80AT0001]</servidor>
+      <nroPaso>3</nroPaso>
+      <JobCTM>PCDE123</JobCTM>
+      <ParametrosJob>
+        <string>PARAMETRO1</string>
+        <string>PARAMETRO2</string>
+      </ParametrosJob>
+    </Paso>
+    <Paso xsi:type="PasoCopiaArchivos">
+      <tipoPaso>copia_archivos</tipoPaso>
+      <servidor>FSXCOM0001</servidor>
+      <nroPaso>4</nroPaso>
+      <servidorDestino>SUX80AT0001</servidorDestino>
+      <rutaOrigen>\\FSXCOM0001\XCOM\B\A\PCDD123</rutaOrigen>
+      <archivoOrigen>PRUEBA_AAAAMMDD.CSV</archivoOrigen>
+      <rutaDestino>/opt/staging/infiles/clientes</rutaDestino>
+      <archivoDestino>PRUEBA_AAAAMMDD.CSV</archivoDestino>
+    </Paso>
+    <Paso xsi:type="PasoEliminacionArchivos">
+      <tipoPaso>eliminacion_archivos</tipoPaso>
+      <servidor>SUX80AT0001</servidor>
+      <nroPaso>5</nroPaso>
+      <ruta>/opt/staging/infiles/clientes</ruta>
+      <archivos>*.csv</archivos>
+    </Paso>
+    <Paso xsi:type="PasoSH">
+      <tipoPaso>sh</tipoPaso>
+      <servidor>[SUX81CT0001 | SUX81AT0001]</servidor>
+      <nroPaso>6</nroPaso>
+      <baseDatos>SBLPRD</baseDatos>
+      <usuarioEjecucion>siebelp</usuarioEjecucion>
+      <ubicacionScript>/opt/EIM_scripts/scripts</ubicacionScript>
+      <script>611_PersonasJuridicas_PuestosTrabajo_Alta.sh</script>
+      <ParametrosSH>
+        <string>SBLSRVEIM1(Server EIMCT) | SBLSRVEIM2(ServerEIMAT)</string>
+      </ParametrosSH>
+    </Paso>
+    <Paso xsi:type="PasoSH">
+      <tipoPaso>sh</tipoPaso>
+      <servidor>[SUX81CT0001 | SUX81AT0001]</servidor>
+      <nroPaso>7</nroPaso>
+      <baseDatos>SBLPRD</baseDatos>
+      <usuarioEjecucion>siebelp</usuarioEjecucion>
+      <ubicacionScript>/opt/EIM_scripts/scripts</ubicacionScript>
+      <script>612_PersonasJuridicas_PuestosTrabajo_Alta.sh</script>
+      <ParametrosSH>
+        <string>SBLSRVEIM1(Server EIMCT) | SBLSRVEIM2(ServerEIMAT)</string>
+      </ParametrosSH>
+    </Paso>
+  </Pasos>
+  <Periodicidad>Diaria</Periodicidad>
+  <DetalleFrecuencia>Diario de Lunes a Lunes.</DetalleFrecuencia>
+  <HoraInicioEjecucion>2021-08-23T23:00:00</HoraInicioEjecucion>
+  <HoraLimiteInicioEjecucion>2021-08-23T23:59:00</HoraLimiteInicioEjecucion>
+  <JobsEntrada>
+    <string>JOB123</string>
+    <string>JOB124</string>
+  </JobsEntrada>
+  <JobsSalida>
+    <string>JOB01</string>
+    <string>JOB02</string>
+    <string>JOB03</string>
+    <string>JOB04</string>
+    <string>JOB05</string>
+    <string>JOB06</string>
+    <string>JOB07</string>
+    <string>JOB08</string>
+    <string>JOB09</string>
+    <string>JOB010</string>
+    <string>JOB011</string>
+    <string>JOB012</string>
+    <string>JOB013</string>
+    <string>JOB014</string>
+  </JobsSalida>
+  <Aclaraciones>Este procedimiento no puede correr con otra instancia de si mismo.</Aclaraciones>
+  <HorarioNoEjecucion>2021-08-23T23:30:00</HorarioNoEjecucion>
+  <AccionNoEjecucion>Enviar aviso a la casilla AyDS_AplicativosEspecialesAPC@bna.com.ar</AccionNoEjecucion>
+  <HorarioJobNoFinaliza>120 minutos</HorarioJobNoFinaliza>
+  <AccionJobNoFinaliza>Enviar aviso a la casilla AyDS_AplicativosEspecialesAPC@bna.com.ar</AccionJobNoFinaliza>
+  <Acciones>
+    <AccionesExitosas>
+      <Accion>
+        <txtBuscado>Texto0</txtBuscado>
+        <txtAccion>Accion0</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto1</txtBuscado>
+        <txtAccion>Accion1</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto2</txtBuscado>
+        <txtAccion>Accion2</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto3</txtBuscado>
+        <txtAccion>Accion3</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto4</txtBuscado>
+        <txtAccion>Accion4</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto5</txtBuscado>
+        <txtAccion>Accion5</txtAccion>
+      </Accion>
+    </AccionesExitosas>
+    <AccionesErroneas>
+      <Accion>
+        <txtBuscado>Texto0</txtBuscado>
+        <txtAccion>Accion0</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto1</txtBuscado>
+        <txtAccion>Accion1</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto2</txtBuscado>
+        <txtAccion>Accion2</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto3</txtBuscado>
+        <txtAccion>Accion3</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto4</txtBuscado>
+        <txtAccion>Accion4</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto5</txtBuscado>
+        <txtAccion>Accion5</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto6</txtBuscado>
+        <txtAccion>Accion6</txtAccion>
+      </Accion>
+      <Accion>
+        <txtBuscado>Texto7</txtBuscado>
+        <txtAccion>Accion7</txtAccion>
+      </Accion>
+    </AccionesErroneas>
+  </Acciones>
+</FormularioCTM>

@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="BNACTMFormGenerator.Views.FormularioCTMView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Column="0" Grid.Row="0" Content="Ruta de guardado de formularios:" Height="21" />
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding RutaFormularios}" Width="200" Height="21" />
+        <Button Grid.Column="2" Grid.Row="0" Command="{Binding GuardarFormulario}" Content="Generar Formularios" Height="21" />
+        <!-- <TextBlock Text="{Binding Mensaje}" Grid.Column="0" Grid.Row="1"  /> -->
+    </Grid>
+</UserControl>

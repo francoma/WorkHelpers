@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="BNACTMFormGenerator.Views.PasoCopiaArchivosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
+             xmlns:vm="clr-namespace:BNACTMFormGenerator.ViewModel"    
+             xmlns:vw="clr-namespace:BNACTMFormGenerator.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="537">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\MainWindowResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="24" />
+            <RowDefinition  Height="21" />
+            <RowDefinition />
+            <RowDefinition  Height="21" />
+            <RowDefinition />
+            <RowDefinition Height="21" />
+            <RowDefinition  Height="110" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="PASO N° " HorizontalAlignment="Right" FontWeight="Bold">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE0E7EA" Offset="0"/>
+                    <GradientStop Color="#FF7DD0F5" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding NroPaso}" HorizontalAlignment="Left" FontWeight="Bold">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE0E7EA" Offset="0"/>
+                    <GradientStop Color="#FF7DD0F5" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+        </TextBox>
+        
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Origen" Background="LightBlue" VerticalAlignment="Center" FontWeight="Bold" TextAlignment="Center" FontSize="12"/>
+        <vw:TransferenciaArchivoView Grid.Row="2" Grid.ColumnSpan="2" DataContext="{Binding Origen}" />
+
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="Destino" Background="LightBlue" VerticalAlignment="Center" FontWeight="Bold" TextAlignment="Center" FontSize="12"/>
+        <vw:TransferenciaArchivoView Grid.Row="4" Grid.ColumnSpan="2" DataContext="{Binding Destino}" />
+
+        <Label Grid.Row="5" Grid.ColumnSpan="2" Content="Observaciones" Height="21"/>
+        <TextBox Grid.ColumnSpan="2"
+                 Grid.Row="6"                 
+                 Height="100"
+                 VerticalAlignment="Top"
+                 AcceptsReturn="True"
+                 Text="{Binding Observaciones, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
+
+    </Grid>
+</UserControl>
+
+    
+    

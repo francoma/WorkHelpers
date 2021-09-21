@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96312A49-9D55-4626-A24E-C575FCE128C2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BNACTMFormGenerator</RootNamespace>
+    <AssemblyName>BNACTMFormGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BaseCommand.cs" />
+    <Compile Include="Dialogs\DialogAddPaso\DialogAddPasoView.xaml.cs">
+      <DependentUpon>DialogAddPasoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogAddPaso\DialogAddPasoViewModel.cs" />
+    <Compile Include="Dialogs\DialogService\DialogResultEnum.cs" />
+    <Compile Include="Dialogs\DialogService\DialogService.cs" />
+    <Compile Include="Dialogs\DialogService\DialogViewModelBase.cs" />
+    <Compile Include="Dialogs\DialogService\DialogWindow.xaml.cs">
+      <DependentUpon>DialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\DataErrorInfoBase.cs" />
+    <Compile Include="Model\Accion.cs" />
+    <Compile Include="Model\AccionesATomar.cs" />
+    <Compile Include="Model\CabeceraFormularioCTM.cs" />
+    <Compile Include="Model\Job.cs" />
+    <Compile Include="Model\Paso.cs" />
+    <Compile Include="Model\PasoCopiaArchivos.cs" />
+    <Compile Include="Model\PasoEliminacionArchivos.cs" />
+    <Compile Include="Model\PasoJob.cs" />
+    <Compile Include="Model\PasoSH.cs" />
+    <Compile Include="Model\PasoSP.cs" />
+    <Compile Include="Model\PasoSQL.cs" />
+    <Compile Include="Model\RelacionOtrosJobs.cs" />
+    <Compile Include="Model\TransferenciaArchivo.cs" />
+    <Compile Include="ViewModel\AccionesATomarViewModel.cs" />
+    <Compile Include="ViewModel\AccionViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\CabeceraFormularioCTMViewModel.cs" />
+    <Compile Include="ViewModel\CommandViewModel.cs" />
+    <Compile Include="ViewModel\FormularioCTMViewModel.cs" />
+    <Compile Include="ViewModel\JobViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\PasoCopiaArchivosViewModel.cs" />
+    <Compile Include="ViewModel\PasoEliminacionArchivosViewModel.cs" />
+    <Compile Include="ViewModel\PasoJobViewModel.cs" />
+    <Compile Include="ViewModel\PasoSHViewModel.cs" />
+    <Compile Include="ViewModel\PasoSPViewModel.cs" />
+    <Compile Include="ViewModel\PasoSQLViewModel.cs" />
+    <Compile Include="ViewModel\PasosViewModel.cs" />
+    <Compile Include="ViewModel\PasoViewModel.cs" />
+    <Compile Include="ViewModel\RelacionOtrosJobsViewModel.cs" />
+    <Compile Include="ViewModel\TransferenciaArchivoViewModel.cs" />
+    <Compile Include="Views\AccionesATomarView.xaml.cs">
+      <DependentUpon>AccionesATomarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccionView.xaml.cs">
+      <DependentUpon>AccionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CabeceraFormularioCTMView.xaml.cs">
+      <DependentUpon>CabeceraFormularioCTMView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormularioCTMView.xaml.cs">
+      <DependentUpon>FormularioCTMView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\JobView.xaml.cs">
+      <DependentUpon>JobView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasoCopiaArchivosView.xaml.cs">
+      <DependentUpon>PasoCopiaArchivosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasoEliminacionArchivosView.xaml.cs">
+      <DependentUpon>PasoEliminacionArchivosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasoJobView.xaml.cs">
+      <DependentUpon>PasoJobView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasoSHView.xaml.cs">
+      <DependentUpon>PasoSHView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasoSPView.xaml.cs">
+      <DependentUpon>PasoSPView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasoSQLView.xaml.cs">
+      <DependentUpon>PasoSQLView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasosView.xaml.cs">
+      <DependentUpon>PasosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasoView.xaml.cs">
+      <DependentUpon>PasoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RelacionOtrosJobsView.xaml.cs">
+      <DependentUpon>RelacionOtrosJobsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TransferenciaArchivoView.xaml.cs">
+      <DependentUpon>TransferenciaArchivoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VML\ViewModelLocator.cs" />
+    <Page Include="Dialogs\DialogAddPaso\DialogAddPasoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\DialogService\DialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="MainWindowResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AccionesATomarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AccionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CabeceraFormularioCTMView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormularioCTMView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\JobView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PasoCopiaArchivosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PasoEliminacionArchivosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PasoJobView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PasoSHView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PasoSPView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PasoSQLView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PasosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PasoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RelacionOtrosJobsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TransferenciaArchivoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\FormularioCTM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

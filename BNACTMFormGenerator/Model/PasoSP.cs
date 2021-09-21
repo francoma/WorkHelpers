@@ -1,0 +1,106 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BNACTMFormGenerator.Model
+{
+    class PasoSP : Paso {
+        public string BaseDatosTest;
+        public string BaseDatosProduccion;
+        public string UsuarioEjecucion;
+        public string StoredProcedure;
+        public ObservableCollection<string> parametros;
+
+        public PasoSP() {
+            TipoDePaso = TipoPaso.Stored_Procedure;
+            TextoPaso = "Ejecución Stored Procedure:";
+            ServidorTest = "[TUX80CT0001 | TUX80AT0001 (utilizar este último en caso de fallo del CT)]";
+            ServidorProd = "[SUX80CT0001 | SUX80AT0001 (utilizar este último en caso de fallo del CT)]";
+            BaseDatosTest = "SBLTST";
+            BaseDatosProduccion = "SBLPRD";
+            NroPaso = 1;            
+        }
+
+        public override string ToStringFormat(string format) {
+
+            string retStr = "PASO " + NroPaso + "\n" + this.TextoPaso + "\nNombre SP: " + StoredProcedure + "\n";
+
+            for (int i = 0; i < (parametros==null ? -1 : parametros.Count) ; i++){
+                retStr += "\tParam" + i + ": " + this.parametros.ElementAt(i) + "\n";
+            }
+            
+            if (format.ToUpper() == "TEST") {
+                retStr += "Servidor: " + ServidorTest + "\n";
+                retStr += "Base de Datos: " + BaseDatosTest + "\n";
+            }
+            else if (format.ToUpper() == "PROD") {
+                retStr += "Servidor: " + ServidorProd + "\n";
+                retStr += "Base de Datos: " + BaseDatosProduccion + "\n";
+            }
+
+            retStr += "Usuario de ejecución SQL: " + UsuarioEjecucion + "\n\n";
+
+            return retStr;
+        }
+
+        static readonly string[] ValidatedProperties = 
+        { 
+            "BaseDatosTest",
+            "BaseDatosProduccion",
+            "UsuarioEjecucion",
+            "StoredProcedure",
+            "TipoDePaso",
+            "ServidorTest",
+            "ServidorProd",       
+            "NroPaso",
+            "TextoPaso"
+        };
+
+        override public string GetValidationError(string propertyName)
+        {
+            if (Array.IndexOf(ValidatedProperties, propertyName) < 0)
+                return null;
+
+            string error = null;
+
+            switch (propertyName) {
+                case "BaseDatosTest":
+                    error = IsStringMissing(BaseDatosTest) ? "El nombre de la Base de Datos de Test es requerido" : null;
+                    break;
+
+                case "BaseDatosProduccion":
+                    error = IsStringMissing(BaseDatosProduccion) ? "El nombre de la Base de Datos de Prod es requerido" : null;
+                    break;
+
+                case "UsuarioEjecucion":
+                    error = IsStringMissing(UsuarioEjecucion) ? "El usuario es requerido" : null;
+                    break;
+
+                case "StoredProcedure":
+                    error = IsStringMissing(StoredProcedure) ? "El nombre del Stored Procedure es requerido" : null;
+                    break;
+
+                case "ServidorTest":
+                    error = IsStringMissing(ServidorTest) ? "El nombre del servidor de Test es requerido" : null;
+                    break;
+
+                case "ServidorProd":
+                    error = IsStringMissing(ServidorProd) ? "El nombre del servidor de Prod es requerido" : null;
+                    break;
+            }
+
+            return error;
+        }
+
+        override public bool IsValid {
+            get {
+                foreach (string property in ValidatedProperties)
+                    if (GetValidationError(property) != null) return false;
+                return true;
+            }
+        }  
+    }
+}

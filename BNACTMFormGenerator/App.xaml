@@ -1,0 +1,11 @@
+﻿<Application x:Class="BNACTMFormGenerator.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dialogaddPaso="clr-namespace:BNACTMFormGenerator.Dialogs.DialogAddPaso"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type dialogaddPaso:DialogAddPasoViewModel}">
+            <dialogaddPaso:DialogAddPasoView></dialogaddPaso:DialogAddPasoView>
+        </DataTemplate>
+    </Application.Resources>
+</Application>

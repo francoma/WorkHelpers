@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="BNACTMFormGenerator.Views.PasoSHView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="380" d:DesignWidth="640">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\MainWindowResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="110" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="PASO N° " HorizontalAlignment="Right" FontWeight="Bold">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE0E7EA" Offset="0"/>
+                    <GradientStop Color="#FF7DD0F5" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+        </TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding NroPaso}" HorizontalAlignment="Left" FontWeight="Bold">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE0E7EA" Offset="0"/>
+                    <GradientStop Color="#FF7DD0F5" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+        </TextBox>
+
+        <Label Grid.Column="0" Grid.Row="1" Content="Tipo Sh:" />
+        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Source={StaticResource TiposSh}}" Height="21" Width="100" HorizontalAlignment="Left" SelectedItem="{Binding Path=CurrentTipoSh}" SelectedIndex="0" />
+
+        <!-- SERVIDOR -->
+        <Label Grid.Column="0" Grid.Row="2" Content="Servidor Test:" />
+        <TextBox Grid.Column="1" 
+                 Grid.Row="2" 
+                 HorizontalAlignment="Left" 
+                 Width="400"
+                 Height="21"
+                 VerticalAlignment="Top"                 
+                 Text="{Binding ServidorTest, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
+        <Label Grid.Column="0" Grid.Row="3" Content="Servidor Prod:" />
+        <TextBox Grid.Column="1" 
+                 Grid.Row="3" 
+                 HorizontalAlignment="Left" 
+                 Width="400"
+                 Height="21"
+                 VerticalAlignment="Top"
+                 Text="{Binding ServidorProd, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
+        
+        <!-- BASE DE DATOS -->
+        <Label Grid.Column="0" Grid.Row="4" Content="Base de Datos Test:" />
+        <TextBox Grid.Column="1" 
+                 Grid.Row="4" 
+                 HorizontalAlignment="Left" 
+                 Width="200"
+                 Height="21"
+                 VerticalAlignment="Top"
+                 Text="{Binding BaseDatosTest, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
+
+        <Label Grid.Column="0" Grid.Row="5" Content="Base de Datos Prod:"   />
+        <TextBox Grid.Column="1" 
+                 Grid.Row="5" 
+                 HorizontalAlignment="Left" 
+                 Width="200"
+                 Height="21"
+                 VerticalAlignment="Top"
+                 Text="{Binding BaseDatosProd, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
+
+        <!-- USUARIO EJECUCION --> 
+        <Label Grid.Column="0" Grid.Row="6" Content="Usuario de Ejecución Test:" />
+        <TextBox Grid.Column="1" 
+                 Grid.Row="6" 
+                 HorizontalAlignment="Left" 
+                 Width="200"
+                 Height="21"
+                 VerticalAlignment="Top"
+                 Text="{Binding UsuarioEjecucionTest, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
+        <Label Grid.Column="0" Grid.Row="7" Content="Usuario de Ejecución Prod:" />
+        <TextBox Grid.Column="1"                  
+                 Grid.Row="7"
+                 Height="21"
+                 VerticalAlignment="Top"                 
+                 Text="{Binding UsuarioEjecucionProd, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
+
+        <!-- UBICACION -->
+        <Label Grid.Column="0" Grid.Row="8" Width="133" Content="Ubicación Sh en Test:"   />
+        <TextBox Grid.Column="1" 
+                 Grid.Row="8" 
+                 HorizontalAlignment="Left" 
+                 Width="200"
+                 Height="21"
+                 VerticalAlignment="Top"
+                 Text="{Binding UbicacionScriptTest, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
+        <Label Grid.Column="0" Grid.Row="9" Content="Ubicación Sh en Prod:" />
+        <TextBox Grid.Column="1"                  
+                 Grid.Row="9"
+                 Height="21"
+                 VerticalAlignment="Top"                 
+                 Text="{Binding UbicacionScriptProd, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
+
+        <!-- PARAMETROS-->
+        <Label Grid.Column="0" Grid.Row="10" Content="Parametros:" />
+        <TextBox Grid.Column="1" Grid.Row="10" Height="21" Text="{Binding NewParam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <ListBox Grid.Column="1" Grid.Row="11" ItemsSource="{Binding Parametros}" SelectedItem="{Binding SelectedParam}" Height="100" />
+        <Button Grid.Column="2" Grid.Row="10" Command="{Binding AddParam}" Content="Agregar" Height="20" />
+        <Button Grid.Column="3" Grid.Row="10" Command="{Binding DelParam}" Content="Eliminar" Height="20"/>
+
+    </Grid>
+</UserControl>

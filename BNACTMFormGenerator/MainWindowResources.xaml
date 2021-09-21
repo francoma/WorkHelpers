@@ -1,0 +1,174 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:model="clr-namespace:BNACTMFormGenerator.Model"   
+                    xmlns:vm="clr-namespace:BNACTMFormGenerator.ViewModel"    
+                    xmlns:vw="clr-namespace:BNACTMFormGenerator.Views">
+
+    <!--<DataTemplate DataType="{x:Type vm:CabeceraFormularioCTMViewModel}">
+        <vw:CabeceraFormularioCTMView />
+    </DataTemplate>-->
+
+    <DataTemplate x:Key="PasoGenerico" DataType="{x:Type vm:PasoViewModel`1}">
+        <vw:PasoView />
+    </DataTemplate>
+
+    <!-- VISTAS PARA CADA PASO DEL JOB -->
+    <DataTemplate DataType="{x:Type vm:PasoSQLViewModel}">
+        <vw:PasoSQLView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PasoSPViewModel}">
+        <vw:PasoSPView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PasoJobViewModel}">
+        <vw:PasoJobView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AccionViewModel}">
+        <vw:AccionView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:JobViewModel}">
+        <vw:JobView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:TransferenciaArchivoViewModel}">
+        <vw:TransferenciaArchivoView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PasoCopiaArchivosViewModel}">
+        <vw:PasoCopiaArchivosView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PasoEliminacionArchivosViewModel}">
+        <vw:PasoEliminacionArchivosView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PasoSHViewModel}">
+        <vw:PasoSHView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:FormularioCTMViewModel}">
+        <vw:FormularioCTMView />
+    </DataTemplate>
+        <!-- VISTAS PARA CADA PASO DEL JOB -->
+    
+    <ObjectDataProvider x:Key="EnumTipoPaso" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="model:TipoPaso"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="model:TipoPeriodicidad"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    <ObjectDataProvider x:Key="EnumTipoOrigen" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="model:TipoOrigen" />
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+
+    <Style x:Key="ToolTipWithErrorMessageOnErrorStyle" TargetType="TextBox">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="ComboBoxToolTipWithErrorMessageOnErrorStyle" TargetType="ComboBox">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <x:Array x:Key="TiposSh" Type="{x:Type sys:String}">
+        <sys:String>Ejecución Workflow</sys:String>
+        <sys:String>Ejecución Tarea EIM</sys:String>
+        <sys:String>Otro</sys:String>
+    </x:Array>
+    
+    <x:Array x:Key="HorasArray" Type="{x:Type sys:String}">
+        <sys:String>00</sys:String>
+        <sys:String>01</sys:String>
+        <sys:String>02</sys:String>
+        <sys:String>03</sys:String>
+        <sys:String>04</sys:String>
+        <sys:String>05</sys:String>
+        <sys:String>06</sys:String>
+        <sys:String>07</sys:String>
+        <sys:String>08</sys:String>
+        <sys:String>09</sys:String>
+        <sys:String>10</sys:String>
+        <sys:String>11</sys:String>
+        <sys:String>12</sys:String>
+        <sys:String>13</sys:String>
+        <sys:String>14</sys:String>
+        <sys:String>15</sys:String>
+        <sys:String>16</sys:String>
+        <sys:String>17</sys:String>
+        <sys:String>18</sys:String>
+        <sys:String>19</sys:String>
+        <sys:String>20</sys:String>
+        <sys:String>21</sys:String>
+        <sys:String>22</sys:String>
+        <sys:String>23</sys:String>
+    </x:Array>
+    <x:Array x:Key="MinutosArray" Type="{x:Type sys:String}">
+        <sys:String>00</sys:String>
+        <sys:String>01</sys:String>
+        <sys:String>02</sys:String>
+        <sys:String>03</sys:String>
+        <sys:String>04</sys:String>
+        <sys:String>05</sys:String>
+        <sys:String>06</sys:String>
+        <sys:String>07</sys:String>
+        <sys:String>08</sys:String>
+        <sys:String>09</sys:String>
+        <sys:String>10</sys:String>
+        <sys:String>11</sys:String>
+        <sys:String>12</sys:String>
+        <sys:String>13</sys:String>
+        <sys:String>14</sys:String>
+        <sys:String>15</sys:String>
+        <sys:String>16</sys:String>
+        <sys:String>17</sys:String>
+        <sys:String>18</sys:String>
+        <sys:String>19</sys:String>
+        <sys:String>20</sys:String>
+        <sys:String>21</sys:String>
+        <sys:String>22</sys:String>
+        <sys:String>23</sys:String>
+        <sys:String>24</sys:String>
+        <sys:String>25</sys:String>
+        <sys:String>26</sys:String>
+        <sys:String>27</sys:String>
+        <sys:String>28</sys:String>
+        <sys:String>29</sys:String>
+        <sys:String>30</sys:String>
+        <sys:String>31</sys:String>
+        <sys:String>32</sys:String>
+        <sys:String>33</sys:String>
+        <sys:String>34</sys:String>
+        <sys:String>35</sys:String>
+        <sys:String>36</sys:String>
+        <sys:String>37</sys:String>
+        <sys:String>38</sys:String>
+        <sys:String>39</sys:String>
+        <sys:String>40</sys:String>
+        <sys:String>41</sys:String>
+        <sys:String>42</sys:String>
+        <sys:String>43</sys:String>
+        <sys:String>44</sys:String>
+        <sys:String>45</sys:String>
+        <sys:String>46</sys:String>
+        <sys:String>47</sys:String>
+        <sys:String>48</sys:String>
+        <sys:String>49</sys:String>
+        <sys:String>50</sys:String>
+        <sys:String>51</sys:String>
+        <sys:String>52</sys:String>
+        <sys:String>53</sys:String>
+        <sys:String>54</sys:String>
+        <sys:String>55</sys:String>
+        <sys:String>56</sys:String>
+        <sys:String>57</sys:String>
+        <sys:String>58</sys:String>
+        <sys:String>59</sys:String>
+    </x:Array>
+</ResourceDictionary>
