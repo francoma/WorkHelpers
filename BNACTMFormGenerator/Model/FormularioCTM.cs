@@ -23,8 +23,8 @@ namespace BNACTMFormGenerator.Model
         Semestral,
         Anual
     };
-
-    class FormularioCTM : DataErrorInfoBase {
+    [Serializable()]
+    public class FormularioCTM : DataErrorInfoBase {
         public CabeceraFormularioCTM Cabecera { get; set; }
         public AccionesATomar Acciones { get; set; }
         public RelacionOtrosJobs Relaciones { get; set; }

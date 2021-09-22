@@ -14,8 +14,8 @@ namespace BNACTMFormGenerator.Model
         STAGING,
         Otro
     }
-
-    class TransferenciaArchivo : DataErrorInfoBase {
+    [Serializable()]
+    public class TransferenciaArchivo : DataErrorInfoBase {
         public TipoOrigen OrigenArchivos;
         
         public string ServidorTest;

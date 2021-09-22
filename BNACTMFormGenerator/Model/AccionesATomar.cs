@@ -9,7 +9,8 @@ using BNACTMFormGenerator.ViewModel;
 
 namespace BNACTMFormGenerator.Model
 {
-    class AccionesATomar : DataErrorInfoBase {
+    [Serializable()]
+    public class AccionesATomar : DataErrorInfoBase {
         public int HoraAccionNoInicia;
         public int MinutosAccionNoInicia;
         public string AvisoNoInicio;

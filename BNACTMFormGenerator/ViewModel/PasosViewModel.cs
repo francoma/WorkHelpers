@@ -126,6 +126,50 @@ namespace BNACTMFormGenerator.ViewModel
             return newList;
         }
 
+        public void PasosFromList(List<Paso> pasos) {
+            PasoViewModel<Paso> p = null;
+
+            foreach (Paso paso in pasos) {
+                switch (paso.TipoDePaso) {
+                    case TipoPaso.SQL:
+                        p = new PasoSQLViewModel((PasoSQL)paso);                        
+                        break;
+
+                    case TipoPaso.Stored_Procedure:
+                        p = new PasoSPViewModel((PasoSP)paso);                        
+                        break;
+
+                    case TipoPaso.Job:
+                        p = new PasoJobViewModel((PasoJob)paso);
+                        p.NroPaso = _pasos.Count + 1;
+                        break;
+
+                    case TipoPaso.Copia_Archivos:
+                        p = new PasoCopiaArchivosViewModel((PasoCopiaArchivos)paso);
+                        p.NroPaso = _pasos.Count + 1;
+                        break;
+
+                    case TipoPaso.Eliminacion_Archivos:
+                        p = new PasoEliminacionArchivosViewModel((PasoEliminacionArchivos)paso);
+                        p.NroPaso = _pasos.Count + 1;
+
+                        break;
+
+                    case TipoPaso.Sh:
+                        p = new PasoSHViewModel((PasoSH)paso);
+                        p.NroPaso = _pasos.Count + 1;
+
+                        break;
+
+                    default:
+                        p = null;
+                        break;
+                }
+                _pasos.Add(p);
+                _pasosString.Add(p.DataObject.ToStringFormat("PROD"));
+            }
+        }
+
         public ObservableCollection<string> PasosString {
             get {                
                 return _pasosString; 

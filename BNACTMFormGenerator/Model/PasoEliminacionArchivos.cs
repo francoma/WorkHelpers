@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BNACTMFormGenerator.Model
 {
+    [Serializable()]
     public class PasoEliminacionArchivos : Paso {
         public string RutaTest;
         public string RutaProd;

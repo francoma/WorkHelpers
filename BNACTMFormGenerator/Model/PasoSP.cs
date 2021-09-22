@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace BNACTMFormGenerator.Model
 {
-    class PasoSP : Paso {
+    [Serializable()]
+    public class PasoSP : Paso {
         public string BaseDatosTest;
         public string BaseDatosProduccion;
         public string UsuarioEjecucion;

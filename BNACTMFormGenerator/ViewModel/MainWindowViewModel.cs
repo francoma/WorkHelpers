@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml.Serialization;
 using BNACTMFormGenerator.Model;
 
 namespace BNACTMFormGenerator.ViewModel
@@ -36,6 +38,29 @@ namespace BNACTMFormGenerator.ViewModel
 
             _formulario = new FormularioCTMViewModel(_cabeceraView, _relacionOtrosJobsView, _accionesATomarView, _pasos);
             _formulario.Visible = "Hidden";
+
+            ////////////// DESERIALIZAR //////////////             
+            FileStream fs = new FileStream("C:\\Cabecera.dat", FileMode.Open);
+            XmlSerializer xs = new XmlSerializer(typeof(CabeceraFormularioCTM));
+            _cabeceraView.DataObject = (CabeceraFormularioCTM)xs.Deserialize(fs);            
+            fs.Close();
+
+            fs = new FileStream("C:\\RelacionOtrosJobs.dat", FileMode.Open);
+            xs = new XmlSerializer(typeof(RelacionOtrosJobs));
+            _relacionOtrosJobsView.DataObject = (RelacionOtrosJobs)xs.Deserialize(fs);
+            fs.Close();
+
+            fs = new FileStream("C:\\AccionesATomar.dat", FileMode.Open);
+            xs = new XmlSerializer(typeof(AccionesATomar));
+            _accionesATomarView.DataObject = (AccionesATomar)xs.Deserialize(fs);
+            fs.Close();
+
+            fs = new FileStream("C:\\Pasos.dat", FileMode.Open);
+            xs = new XmlSerializer(typeof(List<Paso>));
+            _pasos.PasosFromList((List<Paso>)xs.Deserialize(fs));
+            fs.Close();
+            ////////////// DESERIALIZAR ////////////// 
+
         }
 
         private List<CommandViewModel> AgregarCommandos() {

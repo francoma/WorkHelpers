@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BNACTMFormGenerator.Model
 {
+    [Serializable()]
     public class PasoSQL : Paso {
         public string BaseDatosTest;
         public string BaseDatosProduccion;

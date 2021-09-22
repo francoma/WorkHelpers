@@ -8,7 +8,7 @@ using BNACTMFormGenerator.Helpers;
 
 namespace BNACTMFormGenerator.Model
 {
-    class Job : DataErrorInfoBase {
+    public class Job : DataErrorInfoBase {
         public string NombreJobTest { get; set; }
         public string NombreJobProd { get; set; }
 

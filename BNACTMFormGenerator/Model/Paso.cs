@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using BNACTMFormGenerator.Helpers;
 
 namespace BNACTMFormGenerator.Model
 {
+    [Serializable()]
     public enum TipoPaso
     {
         SQL,
@@ -17,7 +19,14 @@ namespace BNACTMFormGenerator.Model
         Eliminacion_Archivos,
         Sh
     }
-
+    
+    [Serializable()]
+    [XmlInclude(typeof(PasoSQL))]
+    [XmlInclude(typeof(PasoSP))]
+    [XmlInclude(typeof(PasoJob))]
+    [XmlInclude(typeof(PasoCopiaArchivos))]
+    [XmlInclude(typeof(PasoEliminacionArchivos))]
+    [XmlInclude(typeof(PasoSH))]
     public class Paso : DataErrorInfoBase {
         public TipoPaso TipoDePaso;
         public string ServidorTest;

@@ -9,7 +9,7 @@ using BNACTMFormGenerator.Model;
 
 namespace BNACTMFormGenerator.ViewModel
 {
-    class AccionViewModel : BaseViewModel {
+    public class AccionViewModel : BaseViewModel {
         private Accion _accion;
 
         public AccionViewModel() {

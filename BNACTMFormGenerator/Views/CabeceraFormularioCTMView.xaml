@@ -16,7 +16,7 @@
         </ResourceDictionary>        
     </UserControl.Resources>
 
-    <Grid Margin="0,0,0,0">
+    <Grid Margin="0,0,0,0" FocusManager.FocusedElement="{Binding ElementName=ControlConFoco}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -43,7 +43,8 @@
                  Width="200" />
         
         <Label Grid.Column="0" Grid.Row="2" Margin="4" Content="Nombre del Procedimiento:" HorizontalAlignment="Right"/>
-        <TextBox Grid.Column="1" 
+        <TextBox Name="ControlConFoco"
+                 Grid.Column="1" 
                  Grid.Row="2"                  
                  Text="{Binding NombreProcedimiento, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
                  Height="21"

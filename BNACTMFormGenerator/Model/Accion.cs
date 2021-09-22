@@ -8,7 +8,7 @@ using BNACTMFormGenerator.Helpers;
 
 namespace BNACTMFormGenerator.Model
 {
-    class Accion : DataErrorInfoBase {
+    public class Accion : DataErrorInfoBase {
         public string TextoBuscado { get; set; }
         public string TextoAccion { get; set; }
 

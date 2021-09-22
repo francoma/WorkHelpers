@@ -32,6 +32,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="110" />
         </Grid.RowDefinitions>
 
@@ -115,7 +116,7 @@
                  Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
 
         <!-- UBICACION -->
-        <Label Grid.Column="0" Grid.Row="8" Width="133" Content="Ubicación Sh en Test:"   />
+        <Label Grid.Column="0" Grid.Row="8" Content="Ubicación Sh en Test:"   />
         <TextBox Grid.Column="1" 
                  Grid.Row="8" 
                  HorizontalAlignment="Left" 
@@ -132,12 +133,21 @@
                  Text="{Binding UbicacionScriptProd, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
                  Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
 
+        <!-- NOMBRE SH -->
+        <Label Grid.Column="0" Grid.Row="10" Content="Script Sh:" />
+        <TextBox Grid.Column="1"                  
+                 Grid.Row="10"
+                 Height="21"
+                 VerticalAlignment="Top"                 
+                 Text="{Binding Script, Mode = TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=true}" 
+                 Style="{StaticResource ToolTipWithErrorMessageOnErrorStyle}" />
+
         <!-- PARAMETROS-->
-        <Label Grid.Column="0" Grid.Row="10" Content="Parametros:" />
-        <TextBox Grid.Column="1" Grid.Row="10" Height="21" Text="{Binding NewParam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <ListBox Grid.Column="1" Grid.Row="11" ItemsSource="{Binding Parametros}" SelectedItem="{Binding SelectedParam}" Height="100" />
-        <Button Grid.Column="2" Grid.Row="10" Command="{Binding AddParam}" Content="Agregar" Height="20" />
-        <Button Grid.Column="3" Grid.Row="10" Command="{Binding DelParam}" Content="Eliminar" Height="20"/>
+        <Label Grid.Column="0" Grid.Row="11" Content="Parametros:" />
+        <TextBox Grid.Column="1" Grid.Row="11" Height="21" Text="{Binding NewParam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <ListBox Grid.Column="1" Grid.Row="12" ItemsSource="{Binding Parametros}" SelectedItem="{Binding SelectedParam}" Height="100" />
+        <Button Grid.Column="2" Grid.Row="11" Command="{Binding AddParam}" Content="Agregar" Height="20" />
+        <Button Grid.Column="3" Grid.Row="11" Command="{Binding DelParam}" Content="Eliminar" Height="20"/>
 
     </Grid>
 </UserControl>

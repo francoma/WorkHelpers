@@ -9,7 +9,8 @@ using BNACTMFormGenerator.Helpers;
 
 namespace BNACTMFormGenerator.Model
 {
-    public class CabeceraFormularioCTM : DataErrorInfoBase {
+    [Serializable()]
+    public class CabeceraFormularioCTM : DataErrorInfoBase {         
         public string Fecha { get; set; }
         public string NombreProc { get; set; }
         public string Usuario { get; set; }

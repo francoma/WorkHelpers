@@ -9,8 +9,9 @@ namespace BNACTMFormGenerator.ViewModel
 {
     class PasoEliminacionArchivosViewModel : PasoViewModel<Paso> {
 
-        public PasoEliminacionArchivosViewModel() :base(new PasoEliminacionArchivos()){ 
-        }
+        public PasoEliminacionArchivosViewModel() :base(new PasoEliminacionArchivos()){ }
+        
+        public PasoEliminacionArchivosViewModel(PasoEliminacionArchivos p) : base(p) { }
 
         public string RutaTest {
             get { return ((PasoEliminacionArchivos)DataObject).RutaTest; }

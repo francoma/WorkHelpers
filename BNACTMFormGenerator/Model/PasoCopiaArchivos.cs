@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BNACTMFormGenerator.Model
 {
-    class PasoCopiaArchivos : Paso {
+    [Serializable()]
+    public class PasoCopiaArchivos : Paso {
         public TransferenciaArchivo Origen;
         public TransferenciaArchivo Destino;
         public string Observaciones;

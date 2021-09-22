@@ -21,6 +21,12 @@ namespace BNACTMFormGenerator.ViewModel
             DelParam = new BaseCommand(OnDelParam, param => _selectedParam != null);
         }
 
+        public PasoSHViewModel(PasoSH p) : base(p) {
+            NewParam = "";
+            AddParam = new BaseCommand(OnAddParam, param => NewParam.Trim().Length > 0);
+            DelParam = new BaseCommand(OnDelParam, param => _selectedParam != null);
+        }
+
         public string CurrentTipoSh { 
             get { return _currentTipoSh; }
             set {
@@ -193,10 +199,10 @@ namespace BNACTMFormGenerator.ViewModel
         public string Script {
             get { return ((PasoSH)DataObject).Script; }
             set {
-                PasoSH psql = (PasoSH)DataObject;
+                PasoSH psh = (PasoSH)DataObject;
 
-                if (psql.Script != value) {
-                    psql.Script = value;
+                if (psh.Script != value) {
+                    psh.Script = value;
                     RaisePropertyChanged("Script");
                 }
             }

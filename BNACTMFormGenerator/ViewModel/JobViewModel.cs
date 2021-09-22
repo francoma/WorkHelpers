@@ -9,7 +9,7 @@ using BNACTMFormGenerator.Model;
 
 namespace BNACTMFormGenerator.ViewModel
 {
-    class JobViewModel : BaseViewModel {
+    public class JobViewModel : BaseViewModel {
         private Job _job;
 
         public JobViewModel() {

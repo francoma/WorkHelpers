@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BNACTMFormGenerator.Model
 {
+    [Serializable()]
     public class PasoJob : Paso {
         public ObservableCollection<string> Parametros;
         public string NombreJobCTMTest;

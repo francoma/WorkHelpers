@@ -11,6 +11,8 @@ namespace BNACTMFormGenerator.ViewModel
     class PasoSQLViewModel : PasoViewModel<Paso> {
         
         public PasoSQLViewModel() : base(new PasoSQL()) { }
+        
+        public PasoSQLViewModel(PasoSQL p) : base(p) { }
 
         public string BaseDatosTest{
             get {return ((PasoSQL)DataObject).BaseDatosTest;}

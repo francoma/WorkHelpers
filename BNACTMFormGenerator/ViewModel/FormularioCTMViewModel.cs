@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Serialization;
 using BNACTMFormGenerator.Model;
 
 namespace BNACTMFormGenerator.ViewModel
@@ -17,6 +19,9 @@ namespace BNACTMFormGenerator.ViewModel
         
         public FormularioCTMViewModel(CabeceraFormularioCTMViewModel c, RelacionOtrosJobsViewModel r, AccionesATomarViewModel a, PasosViewModel p) {
             _form = new FormularioCTM();
+
+            
+
             _form.Cabecera = c.DataObject;
             _form.Relaciones = r.DataObject;
             _form.Acciones = a.DataObject;
@@ -30,10 +35,34 @@ namespace BNACTMFormGenerator.ViewModel
         }
                 
         private void OnGenFormulario(object obj) {
-            _form.GenForm(RutaFormularios, "TEST");
+            ////////////_form.GenForm(RutaFormularios, "TEST");
             //Mensaje = "Formuario para Test Generado en " + RutaFormularios + "TEST.xlsx";
-            _form.GenForm(RutaFormularios, "PROD");
+            ////////////_form.GenForm(RutaFormularios, "PROD");
             //Mensaje += "\nFormuario para Prod Generado en " + RutaFormularios + "PROD.xlsx";
+
+
+            ////////////// SERIALIZAR ////////////// 
+            //FileStream fs = new FileStream("c:\\Cabecera.dat", FileMode.OpenOrCreate);
+            //XmlSerializer xs = new XmlSerializer(typeof(CabeceraFormularioCTM));
+            //xs.Serialize(fs, _form.Cabecera);
+            //fs.Close();
+
+            //fs = new FileStream("c:\\AccionesATomar.dat", FileMode.OpenOrCreate);
+            //xs = new XmlSerializer(typeof(AccionesATomar));
+            //xs.Serialize(fs, _form.Acciones);
+            //fs.Close();
+
+            //fs = new FileStream("c:\\RelacionOtrosJobs.dat", FileMode.OpenOrCreate);
+            //xs = new XmlSerializer(typeof(RelacionOtrosJobs));
+            //xs.Serialize(fs, _form.Relaciones);
+            //fs.Close();
+
+            //fs = new FileStream("c:\\Pasos.dat", FileMode.OpenOrCreate);
+            //xs = new XmlSerializer(typeof(List<Paso>));
+            //xs.Serialize(fs, _form.Pasos);
+            //fs.Close();
+            ////////////// SERIALIZAR ////////////// 
+
         }
 
         public CabeceraFormularioCTM Cabecera {

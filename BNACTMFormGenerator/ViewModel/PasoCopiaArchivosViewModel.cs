@@ -16,6 +16,11 @@ namespace BNACTMFormGenerator.ViewModel
             _destino = new TransferenciaArchivoViewModel(((PasoCopiaArchivos)base.DataObject).Destino);
         }
 
+        public PasoCopiaArchivosViewModel(PasoCopiaArchivos p) : base(p) {
+            _origen = new TransferenciaArchivoViewModel(p.Origen);
+            _destino = new TransferenciaArchivoViewModel(p.Destino);
+        }
+
         public TransferenciaArchivoViewModel Origen {
             get { return _origen; }
             set {

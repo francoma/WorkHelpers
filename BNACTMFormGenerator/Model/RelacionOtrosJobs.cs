@@ -9,7 +9,8 @@ using BNACTMFormGenerator.ViewModel;
 
 namespace BNACTMFormGenerator.Model
 {
-    class RelacionOtrosJobs : DataErrorInfoBase  {
+    [Serializable()]
+    public class RelacionOtrosJobs : DataErrorInfoBase  {
         public ObservableCollection<JobViewModel> JobsEntrada;
         public ObservableCollection<JobViewModel> JobsSalida;
         public ObservableCollection<JobViewModel> JobsParalelos;

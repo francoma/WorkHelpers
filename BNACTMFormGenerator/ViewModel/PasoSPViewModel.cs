@@ -20,6 +20,12 @@ namespace BNACTMFormGenerator.ViewModel
             DelParam = new BaseCommand(OnDelParam, param => _selectedParam != null);
         }
 
+        public PasoSPViewModel(PasoSP p) : base(p) {
+            NewParam = "";
+            AddParam = new BaseCommand(OnAddParam, param => NewParam.Trim().Length > 0);
+            DelParam = new BaseCommand(OnDelParam, param => _selectedParam != null);
+        }
+
         public void OnAddParam(object obj) {
             if (Parametros == null) {
                 Parametros = new ObservableCollection<string>();
