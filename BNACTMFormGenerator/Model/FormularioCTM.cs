@@ -67,7 +67,7 @@ namespace BNACTMFormGenerator.Model
         }
 
         public void GenForm(string outPath, string entorno) {
-            WriteExcel(System.IO.Path.Combine(outPath, entorno + ".xlsx"), entorno);            
+            WriteExcel(outPath, entorno);            
         }
 
         public void WriteExcel(string outPath, string entorno) {

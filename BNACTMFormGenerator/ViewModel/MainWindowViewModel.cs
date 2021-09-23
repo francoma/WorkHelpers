@@ -40,7 +40,7 @@ namespace BNACTMFormGenerator.ViewModel
             _formulario.Visible = "Hidden";
 
             ////////////// DESERIALIZAR //////////////             
-            FileStream fs = new FileStream("C:\\Cabecera.dat", FileMode.Open);
+            /*FileStream fs = new FileStream("C:\\Cabecera.dat", FileMode.Open);
             XmlSerializer xs = new XmlSerializer(typeof(CabeceraFormularioCTM));
             _cabeceraView.DataObject = (CabeceraFormularioCTM)xs.Deserialize(fs);            
             fs.Close();
@@ -59,6 +59,26 @@ namespace BNACTMFormGenerator.ViewModel
             xs = new XmlSerializer(typeof(List<Paso>));
             _pasos.PasosFromList((List<Paso>)xs.Deserialize(fs));
             fs.Close();
+            */
+            FileStream fs = new FileStream("C:\\Formulario.dat", FileMode.Open);
+            XmlSerializer xs = new XmlSerializer(typeof(FormularioCTM));
+            _formulario = new FormularioCTMViewModel((FormularioCTM)xs.Deserialize(fs));
+            
+            _cabeceraView.DataObject = _formulario.Cabecera;
+            _cabeceraView.Visible = "Visible";
+
+            _relacionOtrosJobsView.DataObject = _formulario.Relaciones;
+            _relacionOtrosJobsView.Visible = "Hidden";
+
+            _accionesATomarView.DataObject = _formulario.Acciones;
+            _accionesATomarView.Visible = "Hidden";
+
+            _pasos.PasosFromList(_formulario.Pasos);
+            _pasos.Visible = "Hidden";
+
+            fs.Close();
+            
+            _formulario.Visible = "Hidden";
             ////////////// DESERIALIZAR ////////////// 
 
         }

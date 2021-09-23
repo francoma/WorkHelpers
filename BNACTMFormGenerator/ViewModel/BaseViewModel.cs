@@ -11,9 +11,7 @@ namespace BNACTMFormGenerator.ViewModel
     public abstract class BaseViewModel : DataErrorInfoBase, INotifyPropertyChanged  {
         public event PropertyChangedEventHandler PropertyChanged;
         private string _visible;
-        public int Index { get; set; }
         
-
         protected void RaisePropertyChanged(string property) {
             VerifyPropertyName(property);
 

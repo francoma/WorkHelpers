@@ -15,19 +15,60 @@ namespace BNACTMFormGenerator.ViewModel
     class FormularioCTMViewModel : BaseViewModel {
         private FormularioCTM _form;
         public string RutaFormularios { get; set; }
+        public string RutaConfiguracion { get; set; }
         public BaseCommand GuardarFormulario { get; set; }
-        
+        public BaseCommand SeleccionarCarpeta { get; set; }
+        public BaseCommand SeleccionarArchivo { get; set; }
+        private string _mensaje;
+
+        private void Ctor() {
+            GuardarFormulario = new BaseCommand(OnGenFormulario, CanGenFormulario);
+            SeleccionarCarpeta = new BaseCommand(OnSeleccionarCarpeta);
+            SeleccionarArchivo = new BaseCommand(OnSeleccionarArchivo);
+
+            RutaFormularios = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            RutaConfiguracion = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "ctm_" + DateTime.Now.ToString("ddMMyyyy") + ".dat");
+            Mensaje = String.Empty;        
+        }
+
         public FormularioCTMViewModel(CabeceraFormularioCTMViewModel c, RelacionOtrosJobsViewModel r, AccionesATomarViewModel a, PasosViewModel p) {
             _form = new FormularioCTM();
-
-            
-
             _form.Cabecera = c.DataObject;
             _form.Relaciones = r.DataObject;
             _form.Acciones = a.DataObject;
             _form.Pasos = p.PasosToList();
-            
-            GuardarFormulario = new BaseCommand(OnGenFormulario, CanGenFormulario);
+
+            Ctor();
+        }
+
+        public FormularioCTMViewModel(FormularioCTM f) {
+            _form = f;
+            Ctor();
+        }
+
+        private void OnSeleccionarCarpeta(object o) {
+            using (var fbd = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                System.Windows.Forms.DialogResult result = fbd.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath)) {
+                    RutaFormularios = fbd.SelectedPath;
+                    RaisePropertyChanged("RutaFormularios");
+                }
+            }
+        }
+
+        private void OnSeleccionarArchivo(object o) {
+            using (var s = new System.Windows.Forms.SaveFileDialog()) {
+                s.Filter = "Archivo de Configuración|*.dat|Archivo de Texto|*.txt|Archivo XML|*.xml";
+                System.Windows.Forms.DialogResult result = s.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(s.FileName)) {
+                    RutaConfiguracion = s.FileName;
+                    Serializar();
+                    RaisePropertyChanged("RutaConfiguracion");
+                }                
+            }
         }
 
         private bool CanGenFormulario(object obj) {
@@ -35,12 +76,51 @@ namespace BNACTMFormGenerator.ViewModel
         }
                 
         private void OnGenFormulario(object obj) {
-            ////////////_form.GenForm(RutaFormularios, "TEST");
-            //Mensaje = "Formuario para Test Generado en " + RutaFormularios + "TEST.xlsx";
-            ////////////_form.GenForm(RutaFormularios, "PROD");
-            //Mensaje += "\nFormuario para Prod Generado en " + RutaFormularios + "PROD.xlsx";
+            string nombreJob = "PC";
+            
+            Mensaje = "Generando Formularios...";
 
+            switch (_form.Cabecera.Periodicidad) { 
+                case TipoPeriodicidad.Esporádico:
+                    nombreJob += "DE";
+                    break;
+                case TipoPeriodicidad.Diaria:
+                    nombreJob += "DD";
+                    break;
+                case TipoPeriodicidad.Semanal:
+                    nombreJob += "DS";
+                    break;
+                case TipoPeriodicidad.Quincenal:
+                    nombreJob += "DQ";
+                    break;
+                case TipoPeriodicidad.Mensual: 
+                    nombreJob += "DM";
+                    break;
+                case TipoPeriodicidad.Bimestral:
+                    nombreJob += "DB";
+                    break;
+                case TipoPeriodicidad.Trimestral:
+                    nombreJob += "DT";
+                    break;
+                case TipoPeriodicidad.Semestral:
+                    nombreJob += "DX";
+                    break;
+                case TipoPeriodicidad.Anual:
+                    nombreJob += "DA";
+                    break;
+            }
 
+            string rutaTest = Path.Combine(RutaFormularios, nombreJob + "XXXT.xlsx");
+            string rutaProd = Path.Combine(RutaFormularios, nombreJob + "XXX.xlsx");
+
+            _form.GenForm(rutaTest, "TEST");
+            Mensaje = "Formuario para Test generado en " + rutaTest;
+            _form.GenForm(rutaProd, "PROD");
+            Mensaje += "\nFormuario para Prod generado en " + rutaProd;
+            
+        }
+
+        private void Serializar() {
             ////////////// SERIALIZAR ////////////// 
             //FileStream fs = new FileStream("c:\\Cabecera.dat", FileMode.OpenOrCreate);
             //XmlSerializer xs = new XmlSerializer(typeof(CabeceraFormularioCTM));
@@ -61,8 +141,12 @@ namespace BNACTMFormGenerator.ViewModel
             //xs = new XmlSerializer(typeof(List<Paso>));
             //xs.Serialize(fs, _form.Pasos);
             //fs.Close();
-            ////////////// SERIALIZAR ////////////// 
 
+            FileStream fs = new FileStream(RutaConfiguracion, FileMode.OpenOrCreate);
+            XmlSerializer xs = new XmlSerializer(typeof(FormularioCTM));
+            xs.Serialize(fs, _form);
+            fs.Close();
+            ////////////// SERIALIZAR //////////////         
         }
 
         public CabeceraFormularioCTM Cabecera {
@@ -71,6 +155,16 @@ namespace BNACTMFormGenerator.ViewModel
                 _form.Cabecera = value;
                 RaisePropertyChanged("Cabecera");
             } 
+        }
+
+        public string Mensaje {
+            get {
+                return _mensaje;
+            }
+            set {
+                _mensaje = value;
+                RaisePropertyChanged("Mensaje");
+            }
         }
 
         public AccionesATomar Acciones {
@@ -96,7 +190,7 @@ namespace BNACTMFormGenerator.ViewModel
                 RaisePropertyChanged("Pasos");
             }
         }
-        
+
         public override string GetValidationError(string propertyName) {
             return null;
         }

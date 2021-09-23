@@ -3,22 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="600">
-    <Grid>
+             mc:Ignorable="d" d:DesignWidth="650" Height="160">
+    <UserControl.Resources>
+        <ResourceDictionary Source="..\MainWindowResources.xaml" />
+    </UserControl.Resources>
+
+    <Grid Margin="10 10 10 10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180" />
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="120"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
-        
-        <Label Grid.Column="0" Grid.Row="0" Content="Ruta de guardado de formularios:" Height="21" />
-        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding RutaFormularios}" Width="200" Height="21" />
-        <Button Grid.Column="2" Grid.Row="0" Command="{Binding GuardarFormulario}" Content="Generar Formularios" Height="21" />
-        <!-- <TextBlock Text="{Binding Mensaje}" Grid.Column="0" Grid.Row="1"  /> -->
+
+        <Label Grid.Column="0" Grid.Row="0" Content="Guardar los formularios en:" Height="25" />
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding RutaFormularios}" Width="200" Height="21"  IsEnabled="False"/>
+        <Button Grid.Column="2" Grid.Row="0" Command="{Binding SeleccionarCarpeta}" Content="Seleccionar Carpeta" Height="21" Width="120" />
+        <Button Grid.Column="3" Grid.Row="0" Command="{Binding GuardarFormulario}" Content="Generar Formularios" Height="21" Width="120" />
+        <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding Mensaje, UpdateSourceTrigger=PropertyChanged}"  Margin="0,4,0,-3" Height="45" FontWeight="Bold" IsReadOnly="True" Background="LightGray" Foreground="Gray"/>
+
+        <Label Grid.Column="0" Grid.Row="2" Content="Guardar configuración actual:" Height="25" />
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding RutaConfiguracion}" Width="200" Height="21"  IsEnabled="False"/>
+        <Button Grid.Column="2" Grid.Row="2" Command="{Binding SeleccionarArchivo}" Content="Guardar" Height="21" Width="80" HorizontalAlignment="Left" />
     </Grid>
 </UserControl>
+
+    
+    
