@@ -2,7 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:dialogaddPaso="clr-namespace:BNACTMFormGenerator.Dialogs.DialogAddPaso"
-             StartupUri="MainWindow.xaml">
+             xmlns:views="clr-namespace:BNACTMFormGenerator.Views"
+             xmlns:viewmodel="clr-namespace:BNACTMFormGenerator.ViewModel"
+             StartupUri=".\Views\MainWindowView.xaml">
     <Application.Resources>
         <DataTemplate DataType="{x:Type dialogaddPaso:DialogAddPasoViewModel}">
             <dialogaddPaso:DialogAddPasoView></dialogaddPaso:DialogAddPasoView>

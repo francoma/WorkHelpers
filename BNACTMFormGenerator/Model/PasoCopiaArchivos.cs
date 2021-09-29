@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BNACTMFormGenerator.Model
 {
@@ -22,8 +18,8 @@ namespace BNACTMFormGenerator.Model
         }
 
         public override string ToStringFormat(string format) {
-            return "PASO " + NroPaso + "\n" + TextoPaso + "\nOrigen\n" + Origen.ToStringFormat(format) + "\nDestino\n" + Destino.ToStringFormat(format) 
-                           + (Observaciones.Length > 0 ? "\nObservaciones: " + Observaciones : "\n");
+            return "PASO " + NroPaso + "\n" + TextoPaso + "\nOrigen\n" + Origen.ToStringFormat(format) + "\nDestino\n" + Destino.ToStringFormat(format)
+                + (Observaciones.Length > 0 ? "\nObservaciones: " + Observaciones + "\n\n" : "\n\n");
         }
 
         static readonly string[] ValidatedProperties = 

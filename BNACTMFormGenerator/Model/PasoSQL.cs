@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BNACTMFormGenerator.Model
 {
@@ -38,7 +33,7 @@ exit";
             NroPaso = 1;
             UsuarioEjecucion = "";
         }
-
+        
         public override string ToString() {
             string retStr = "PASO " + NroPaso + "\n" + TextoPaso + "\n";
             retStr += TextoSQL + "\n";

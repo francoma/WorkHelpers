@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BNACTMFormGenerator.Model;
 
 namespace BNACTMFormGenerator.ViewModel
@@ -60,7 +56,7 @@ namespace BNACTMFormGenerator.ViewModel
                             if (Parametros == null) Parametros = new ObservableCollection<string>();
                             else Parametros.Clear();
 
-                            Parametros.Add("SBLSRVEIM1(Server EIMCT) | SBLSRVEIM2(ServerEIMAT)");                            
+                            Parametros.Add("SBLSRVEIM1(Server EIMCT) | SBLSRVEIM2(ServerEIMAT)");
 
                             break;
 
@@ -72,7 +68,7 @@ namespace BNACTMFormGenerator.ViewModel
                             Script = String.Empty;
 
                             if (Parametros != null) Parametros.Clear();
-
+                            
                             break;
 
                     }

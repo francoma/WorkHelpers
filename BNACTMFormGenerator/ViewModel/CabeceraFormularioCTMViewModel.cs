@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BNACTMFormGenerator.Model;
+﻿using BNACTMFormGenerator.Model;
 
 namespace BNACTMFormGenerator.ViewModel
 {

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BNACTMFormGenerator.Helpers;
 using BNACTMFormGenerator.ViewModel;
 using Microsoft.Office.Interop.Excel;
@@ -193,6 +189,107 @@ namespace BNACTMFormGenerator.Model
             _sheet.Shapes.Item(PASOS2).TextFrame.Characters(Type.Missing, Type.Missing).Text = txtPasos2;
             Boldify();
 
+            List<string> srvListTst = new List<string>();
+            List<string> srvListPrd = new List<string>();
+
+            Pasos.ForEach(
+                i =>
+                {
+                    switch(i.TipoDePaso){
+                        case TipoPaso.SQL:
+                        case TipoPaso.Stored_Procedure:
+                            srvListTst.Add("TUX80CT0001");
+                            srvListTst.Add("TUX80AT0001");
+                            srvListPrd.Add("SUX80CT0001");
+                            srvListPrd.Add("SUX80AT0001");
+                            break;
+
+                        case TipoPaso.Job:
+                            srvListTst.Add(i.ServidorTest);
+                            srvListPrd.Add(i.ServidorProd);    
+                            break;
+
+                        case TipoPaso.Copia_Archivos:
+                            switch( ((PasoCopiaArchivos)i).Origen.OrigenArchivos) {
+                                case TipoOrigen.HOST:
+                                    srvListTst.Add("HOST");
+                                    srvListPrd.Add("HOST");
+                                    break;
+                                case TipoOrigen.STAGING: 
+                                    srvListTst.Add("TUX80CT0001");
+                                    srvListTst.Add("TUX80AT0001");
+                                    srvListPrd.Add("SUX80CT0001");
+                                    srvListPrd.Add("SUX80AT0001");                                    
+                                    break;
+                                case TipoOrigen.XCOM:
+                                    srvListTst.Add("FSXCOM0001");
+                                    srvListPrd.Add("FSXCOM0001"); 
+                                    break;
+                                case TipoOrigen.Otro:
+                                    srvListTst.Add(((PasoCopiaArchivos)i).Origen.ServidorTest);
+                                    srvListPrd.Add(((PasoCopiaArchivos)i).Origen.ServidorProd);
+                                    break;
+                            }
+                            
+                            switch (((PasoCopiaArchivos)i).Destino.OrigenArchivos) {
+                                case TipoOrigen.HOST:
+                                    srvListTst.Add("HOST");
+                                    srvListPrd.Add("HOST");
+                                    break;
+                                case TipoOrigen.STAGING:
+                                    srvListTst.Add("TUX80CT0001");
+                                    srvListTst.Add("TUX80AT0001");
+                                    srvListPrd.Add("SUX80CT0001");
+                                    srvListPrd.Add("SUX80AT0001");
+                                    break;
+                                case TipoOrigen.XCOM:
+                                    srvListTst.Add("FSXCOM0001");
+                                    srvListPrd.Add("FSXCOM0001");   
+                                    break;
+                                case TipoOrigen.Otro:
+                                    srvListTst.Add(((PasoCopiaArchivos)i).Origen.ServidorTest);
+                                    srvListPrd.Add(((PasoCopiaArchivos)i).Origen.ServidorProd);
+                                    break;
+                            }
+                            break;
+
+                        case TipoPaso.Eliminacion_Archivos:
+                            srvListTst.Add(i.ServidorTest);
+                            srvListPrd.Add(i.ServidorProd);    
+                            break;
+
+                        case TipoPaso.Sh:
+                            srvListTst.Add(i.ServidorTest);
+                            srvListPrd.Add(i.ServidorProd);    
+                            break;
+                    }
+                }
+            );
+
+            srvListTst = srvListTst.Distinct().ToList();
+            srvListPrd = srvListPrd.Distinct().ToList();
+
+            if (entorno == "TEST") {
+                for (int i = 0; i < srvListTst.Count; i++) {
+                    if (i < 5) _sheet.Cells[minServidoresIntervinientes + i, "G"] = srvListTst.ElementAt(i);
+                    else if (i > 4 && i < 10) _sheet.Cells[minServidoresIntervinientes + (i % 5), "I"] = srvListTst.ElementAt(i);
+                }
+
+                _sheet.Cells[minDBIntervinientes + lenList, "G"] = "SBLTST";
+            } else if (entorno == "PROD") {
+                for (int i = 0; i < srvListPrd.Count; i++) {
+                    if (i < 5) _sheet.Cells[minServidoresIntervinientes + i, "G"] = srvListPrd.ElementAt(i);
+                    else if (i > 4 && i < 10) _sheet.Cells[minServidoresIntervinientes + (i % 5), "I"] = srvListPrd.ElementAt(i);
+                }
+                _sheet.Cells[minDBIntervinientes + lenList, "G"] = "SBLPRD";
+            }
+
+            // El único Sistema Operativo siempre es AIX
+            _sheet.Cells[minSOIntervinientes + lenList, "G"] = "AIX";
+            
+            // El único Motor de DB siempre es Oracle
+            _sheet.Cells[minMotoresDBIntervinientes + lenList, "G"] = "ORACLE";
+            
             _sheet.SaveAs(outPath);
             _xlsx.Workbooks.Close();
             _xlsx.Quit();
@@ -262,7 +359,7 @@ namespace BNACTMFormGenerator.Model
             if (propertyName == "Pasos")
                 if (Pasos.Count == 0)
                     error = "Debe existir al menos un Paso en el Formulario";
-
+            
             return error;
         }
 
@@ -273,3 +370,4 @@ namespace BNACTMFormGenerator.Model
         }
     }
 }
+

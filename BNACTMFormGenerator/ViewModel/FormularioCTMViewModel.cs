@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Xml.Serialization;
 using BNACTMFormGenerator.Model;
 
@@ -18,17 +12,23 @@ namespace BNACTMFormGenerator.ViewModel
         public string RutaConfiguracion { get; set; }
         public BaseCommand GuardarFormulario { get; set; }
         public BaseCommand SeleccionarCarpeta { get; set; }
-        public BaseCommand SeleccionarArchivo { get; set; }
+        public BaseCommand GuardarConfiguracion { get; set; }
         private string _mensaje;
 
         private void Ctor() {
             GuardarFormulario = new BaseCommand(OnGenFormulario, CanGenFormulario);
             SeleccionarCarpeta = new BaseCommand(OnSeleccionarCarpeta);
-            SeleccionarArchivo = new BaseCommand(OnSeleccionarArchivo);
+            GuardarConfiguracion = new BaseCommand(OnSeleccionarArchivo, param => RutaConfiguracion != null && RutaConfiguracion.Length > 0);
 
             RutaFormularios = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             RutaConfiguracion = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "ctm_" + DateTime.Now.ToString("ddMMyyyy") + ".dat");
-            Mensaje = String.Empty;        
+            Mensaje = String.Empty;
+            Visible = "Visible";
+        }
+
+        public FormularioCTMViewModel() {
+            _form = new FormularioCTM();
+            Ctor();
         }
 
         public FormularioCTMViewModel(CabeceraFormularioCTMViewModel c, RelacionOtrosJobsViewModel r, AccionesATomarViewModel a, PasosViewModel p) {
@@ -61,6 +61,7 @@ namespace BNACTMFormGenerator.ViewModel
         private void OnSeleccionarArchivo(object o) {
             using (var s = new System.Windows.Forms.SaveFileDialog()) {
                 s.Filter = "Archivo de Configuración|*.dat|Archivo de Texto|*.txt|Archivo XML|*.xml";
+                
                 System.Windows.Forms.DialogResult result = s.ShowDialog();
 
                 if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(s.FileName)) {
@@ -72,7 +73,7 @@ namespace BNACTMFormGenerator.ViewModel
         }
 
         private bool CanGenFormulario(object obj) {
-            return _form.Cabecera.IsValid && _form.Relaciones.IsValid && _form.Acciones.IsValid && _form.Pasos.Count > 0;
+            return _form != null && _form.Cabecera.IsValid && _form.Relaciones.IsValid && _form.Acciones.IsValid && _form.Pasos.Count > 0;
         }
                 
         private void OnGenFormulario(object obj) {
@@ -121,32 +122,10 @@ namespace BNACTMFormGenerator.ViewModel
         }
 
         private void Serializar() {
-            ////////////// SERIALIZAR ////////////// 
-            //FileStream fs = new FileStream("c:\\Cabecera.dat", FileMode.OpenOrCreate);
-            //XmlSerializer xs = new XmlSerializer(typeof(CabeceraFormularioCTM));
-            //xs.Serialize(fs, _form.Cabecera);
-            //fs.Close();
-
-            //fs = new FileStream("c:\\AccionesATomar.dat", FileMode.OpenOrCreate);
-            //xs = new XmlSerializer(typeof(AccionesATomar));
-            //xs.Serialize(fs, _form.Acciones);
-            //fs.Close();
-
-            //fs = new FileStream("c:\\RelacionOtrosJobs.dat", FileMode.OpenOrCreate);
-            //xs = new XmlSerializer(typeof(RelacionOtrosJobs));
-            //xs.Serialize(fs, _form.Relaciones);
-            //fs.Close();
-
-            //fs = new FileStream("c:\\Pasos.dat", FileMode.OpenOrCreate);
-            //xs = new XmlSerializer(typeof(List<Paso>));
-            //xs.Serialize(fs, _form.Pasos);
-            //fs.Close();
-
             FileStream fs = new FileStream(RutaConfiguracion, FileMode.OpenOrCreate);
             XmlSerializer xs = new XmlSerializer(typeof(FormularioCTM));
             xs.Serialize(fs, _form);
             fs.Close();
-            ////////////// SERIALIZAR //////////////         
         }
 
         public CabeceraFormularioCTM Cabecera {

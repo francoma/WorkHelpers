@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Xml.Serialization;
 using BNACTMFormGenerator.Model;
 
@@ -38,49 +33,6 @@ namespace BNACTMFormGenerator.ViewModel
 
             _formulario = new FormularioCTMViewModel(_cabeceraView, _relacionOtrosJobsView, _accionesATomarView, _pasos);
             _formulario.Visible = "Hidden";
-
-            ////////////// DESERIALIZAR //////////////             
-            /*FileStream fs = new FileStream("C:\\Cabecera.dat", FileMode.Open);
-            XmlSerializer xs = new XmlSerializer(typeof(CabeceraFormularioCTM));
-            _cabeceraView.DataObject = (CabeceraFormularioCTM)xs.Deserialize(fs);            
-            fs.Close();
-
-            fs = new FileStream("C:\\RelacionOtrosJobs.dat", FileMode.Open);
-            xs = new XmlSerializer(typeof(RelacionOtrosJobs));
-            _relacionOtrosJobsView.DataObject = (RelacionOtrosJobs)xs.Deserialize(fs);
-            fs.Close();
-
-            fs = new FileStream("C:\\AccionesATomar.dat", FileMode.Open);
-            xs = new XmlSerializer(typeof(AccionesATomar));
-            _accionesATomarView.DataObject = (AccionesATomar)xs.Deserialize(fs);
-            fs.Close();
-
-            fs = new FileStream("C:\\Pasos.dat", FileMode.Open);
-            xs = new XmlSerializer(typeof(List<Paso>));
-            _pasos.PasosFromList((List<Paso>)xs.Deserialize(fs));
-            fs.Close();
-            */
-            FileStream fs = new FileStream("C:\\Formulario.dat", FileMode.Open);
-            XmlSerializer xs = new XmlSerializer(typeof(FormularioCTM));
-            _formulario = new FormularioCTMViewModel((FormularioCTM)xs.Deserialize(fs));
-            
-            _cabeceraView.DataObject = _formulario.Cabecera;
-            _cabeceraView.Visible = "Visible";
-
-            _relacionOtrosJobsView.DataObject = _formulario.Relaciones;
-            _relacionOtrosJobsView.Visible = "Hidden";
-
-            _accionesATomarView.DataObject = _formulario.Acciones;
-            _accionesATomarView.Visible = "Hidden";
-
-            _pasos.PasosFromList(_formulario.Pasos);
-            _pasos.Visible = "Hidden";
-
-            fs.Close();
-            
-            _formulario.Visible = "Hidden";
-            ////////////// DESERIALIZAR ////////////// 
-
         }
 
         private List<CommandViewModel> AgregarCommandos() {
@@ -91,6 +43,7 @@ namespace BNACTMFormGenerator.ViewModel
                 new CommandViewModel("Acciones", TVista.Acciones, new BaseCommand(MostrarVista)),                
                 new CommandViewModel("Pasos", TVista.Pasos , new BaseCommand(MostrarVista)),        
                 new CommandViewModel("Generar Formularios", TVista.Formulario , new BaseCommand(MostrarVista)),        
+                new CommandViewModel("Cargar Formulario existente", TVista.CargarArchivo, new BaseCommand(MostrarVista))      
             };
         }
 
@@ -144,10 +97,55 @@ namespace BNACTMFormGenerator.ViewModel
                     Formulario.Visible = "Visible";
 
                     Formulario.Pasos = _pasos.PasosToList();
+                    SelectedView = Formulario;
+                    break;
+
+                case TVista.CargarArchivo:                    
+                    CabeceraView.Visible = "Hidden";
+                    RelacionOtrosJobsView.Visible = "Hidden";
+                    AccionesATomar.Visible = "Hidden";
+                    Pasos.Visible = "Hidden";
+                    Formulario.Visible = "Hidden";
+
+                    using (var ofd = new System.Windows.Forms.OpenFileDialog()) {
+                        System.Windows.Forms.DialogResult result = ofd.ShowDialog();
+
+                        if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(ofd.FileName)) {
+                            FileStream fs = new FileStream(ofd.FileName, FileMode.Open);
+                            XmlSerializer xs = new XmlSerializer(typeof(FormularioCTM));
+                            _formulario = new FormularioCTMViewModel((FormularioCTM)xs.Deserialize(fs));
+                            RaisePropertyChanged("Formulario");
+                            fs.Close();
+
+                            _cabeceraView = new CabeceraFormularioCTMViewModel();
+                            _cabeceraView.DataObject = _formulario.Cabecera;
+                            RaisePropertyChanged("CabeceraView");
+                            
+                            _relacionOtrosJobsView = new RelacionOtrosJobsViewModel();
+                            _relacionOtrosJobsView.DataObject = _formulario.Relaciones;
+                            RaisePropertyChanged("RelacionOtrosJobsView");
+
+                            _accionesATomarView = new AccionesATomarViewModel();
+                            _accionesATomarView.DataObject = _formulario.Acciones;
+                            RaisePropertyChanged("AccionesATomar");
+
+                            _pasos = new PasosViewModel();
+                            _pasos.PasosFromList(_formulario.Pasos);
+                            RaisePropertyChanged("Pasos");
+                        }
+            
+                        CabeceraView.Visible = "Visible";
+                        RelacionOtrosJobsView.Visible = "Hidden";
+                        AccionesATomar.Visible = "Hidden";
+                        Pasos.Visible = "Hidden";
+                        Formulario.Visible = "Hidden";
+
+                        SelectedView = CabeceraView;
+                    }                   
 
                     break;
             }
-
+            
             RaisePropertyChanged("SelectedView");
             RaisePropertyChanged("Visible");
         }
@@ -170,22 +168,43 @@ namespace BNACTMFormGenerator.ViewModel
 
         public CabeceraFormularioCTMViewModel CabeceraView {
             get { return _cabeceraView; }
+            set {
+                _cabeceraView = value;
+                RaisePropertyChanged("CabeceraView");
+            }
         }
 
         public RelacionOtrosJobsViewModel RelacionOtrosJobsView {
             get { return _relacionOtrosJobsView; }
+            set {
+                _relacionOtrosJobsView = value;
+                RaisePropertyChanged("RelacionOtrosJobsView");
+            }
+
         }
 
         public AccionesATomarViewModel AccionesATomar {
             get { return _accionesATomarView; }
+            set{
+                _accionesATomarView = value;
+                RaisePropertyChanged("AccionesATomar");
+            }
         }
 
         public PasosViewModel Pasos {
             get { return _pasos;  }
+            set {
+                _pasos = value;
+                RaisePropertyChanged("Pasos");
+            }
         }
 
         public FormularioCTMViewModel Formulario {
             get { return _formulario; }
+            set {
+                _formulario = value;               
+                RaisePropertyChanged("Formulario");
+            }
         }
 
         public override string GetValidationError(string propertyName) {
@@ -194,3 +213,4 @@ namespace BNACTMFormGenerator.ViewModel
 
     }
 }
+

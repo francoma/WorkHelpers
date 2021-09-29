@@ -38,10 +38,11 @@
             <Button Grid.Column="2" Grid.Row="0" Content="Agregar Paso" Command="{Binding AddCommand}" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="20" Width="80"/>
             <Button Grid.Column="3" Grid.Row="0" Content="Borrar Paso" Command="{Binding DeleteCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="80"/>
         </Grid>
-        <ListBox Height="600" 
+        <ListBox Height="600"
+                 Width="600"
+                 HorizontalAlignment="Left"
                  Grid.Column="0" 
-                 Grid.Row="1"                  
-                 Grid.ColumnSpan="4" 
+                 Grid.Row="1"
                  ItemsSource="{Binding PasosString}" 
                  SelectedIndex="{Binding SelectedPasoIndex}"
                  ScrollViewer.VerticalScrollBarVisibility="Visible" 

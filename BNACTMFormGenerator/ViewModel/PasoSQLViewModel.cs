@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BNACTMFormGenerator.Model;
+﻿using BNACTMFormGenerator.Model;
 
 namespace BNACTMFormGenerator.ViewModel
 {
     class PasoSQLViewModel : PasoViewModel<Paso> {
-        
+
         public PasoSQLViewModel() : base(new PasoSQL()) { }
-        
+
         public PasoSQLViewModel(PasoSQL p) : base(p) { }
+
 
         public string BaseDatosTest{
             get {return ((PasoSQL)DataObject).BaseDatosTest;}

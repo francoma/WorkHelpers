@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace BNACTMFormGenerator.ViewModel
@@ -19,7 +15,8 @@ namespace BNACTMFormGenerator.ViewModel
         PasoJob,
         PasoCopiaArchivos,
         PasoEliminacionArchivos,
-        PasoSh
+        PasoSh,
+        CargarArchivo
     }
 
     class CommandViewModel : BaseViewModel {

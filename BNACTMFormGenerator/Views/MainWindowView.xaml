@@ -1,0 +1,50 @@
+﻿<Window x:Class="BNACTMFormGenerator.Views.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views = "clr-namespace:BNACTMFormGenerator.Views"
+        xmlns:viewModel = "clr-namespace:BNACTMFormGenerator.ViewModel"
+        xmlns:vml = "clr-namespace:BNACTMFormGenerator.VML"
+        vml:ViewModelLocator.AutoHookedUpViewModel = "True"                     
+        Title="BNA Generador de Formulario CTM" WindowState="Maximized">
+
+    <Window.Resources>
+        <ResourceDictionary>            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\MainWindowResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel />
+    </Window.DataContext>
+
+    <DockPanel>
+        <ItemsControl IsTabStop="False" ItemsSource="{Binding Commands}" DockPanel.Dock="Left">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Width="100" FontSize="12" Margin="2,6">
+                    <Hyperlink Command="{Binding Path=Command}" CommandParameter="{Binding Path=TipoVista}">
+                        <TextBlock Text="{Binding Path=CommandText}" TextWrapping="WrapWithOverflow" />
+                    </Hyperlink>
+                    </TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <ItemsControl IsTabStop="False" ItemsSource="{Binding}" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" DockPanel.Dock="Right" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <views:CabeceraFormularioCTMView Grid.Column="0" Grid.Row="0" DataContext="{Binding CabeceraView}" Visibility="{Binding Path=Visible}" />
+                <views:RelacionOtrosJobsView Grid.Column="0" Grid.Row="0" DataContext="{Binding RelacionOtrosJobsView}" Visibility="{Binding Path=Visible}" />
+                <views:AccionesATomarView Grid.Column="0" Grid.Row="0" DataContext="{Binding AccionesATomar}" Visibility="{Binding Path=Visible}" />
+                <views:PasosView Grid.Column="0" Grid.Row="0" DataContext="{Binding Pasos}" Visibility="{Binding Path=Visible}" />
+                <views:FormularioCTMView Grid.Column="0" Grid.Row="0" DataContext="{Binding Formulario}" Visibility="{Binding Path=Visible}" />
+            </Grid>
+        </ItemsControl>        
+    </DockPanel>
+
+</Window>

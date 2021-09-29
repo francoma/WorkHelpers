@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BNACTMFormGenerator.Model
 {
@@ -45,11 +42,12 @@ namespace BNACTMFormGenerator.Model
                 retStr += "Ubicación Origen: " + UbicacionScriptProd;                        
             }
 
-            retStr += (Parametros == null ? "\n" : "\nParámetros:\n");
+            retStr += (Parametros == null ? "\n\n" : "\nParámetros:\n");
             for (int i = 0; i < (Parametros == null ? -1 : Parametros.Count); i++) {
                 retStr += "\tParam" + i + ": " + Parametros.ElementAt(i) + "\n";
             }
-
+            
+            retStr += "\n";
             return retStr;
         }
 

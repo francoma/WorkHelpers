@@ -28,7 +28,6 @@
         </ResourceDictionary>
     </Window.Resources>
     
-    
     <Window.DataContext>        
         <viewModel:MainWindowViewModel />
     </Window.DataContext>

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BNACTMFormGenerator.Model;
 
 namespace BNACTMFormGenerator.ViewModel
@@ -26,6 +22,7 @@ namespace BNACTMFormGenerator.ViewModel
             set {
                 _origen = value;
                 ((PasoCopiaArchivos)DataObject).Origen = _origen.DataObject;
+
                 RaisePropertyChanged("Origen");                
             }
         }

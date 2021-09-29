@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using BNACTMFormGenerator.Model;
 
 namespace BNACTMFormGenerator.ViewModel
@@ -15,12 +10,14 @@ namespace BNACTMFormGenerator.ViewModel
         public BaseCommand DelParam { get; set; }
 
         public PasoSPViewModel() : base(new PasoSP()) {
-            NewParam = "";
-            AddParam = new BaseCommand(OnAddParam, param => NewParam.Trim().Length > 0);
-            DelParam = new BaseCommand(OnDelParam, param => _selectedParam != null);
+            Ctor();
         }
 
         public PasoSPViewModel(PasoSP p) : base(p) {
+            Ctor();
+        }
+
+        private void Ctor() {
             NewParam = "";
             AddParam = new BaseCommand(OnAddParam, param => NewParam.Trim().Length > 0);
             DelParam = new BaseCommand(OnDelParam, param => _selectedParam != null);

@@ -1,9 +1,9 @@
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\bin\Debug\BNACTMFormGenerator.exe.config
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\bin\Debug\BNACTMFormGenerator.exe
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\bin\Debug\BNACTMFormGenerator.pdb
+c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\BNACTMFormGenerator.csprojResolveAssemblyReference.cache
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Dialogs\DialogService\DialogWindow.baml
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\AccionView.baml
-c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\FormularioCTMView.baml
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\JobView.baml
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\PasoEliminacionArchivosView.baml
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\PasoSHView.baml
@@ -16,6 +16,7 @@ c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerato
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\CabeceraFormularioCTMView.g.cs
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\FormularioCTMView.g.cs
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\JobView.g.cs
+c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\MainWindowView.g.cs
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\PasoCopiaArchivosView.g.cs
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\PasoEliminacionArchivosView.g.cs
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\PasoJobView.g.cs
@@ -36,6 +37,8 @@ c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerato
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\MainWindowResources.baml
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\AccionesATomarView.baml
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\CabeceraFormularioCTMView.baml
+c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\FormularioCTMView.baml
+c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\MainWindowView.baml
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\PasoCopiaArchivosView.baml
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\PasoJobView.baml
 c:\Documentos\Visual Studio 2012\Projects\BNACTMFormGenerator\BNACTMFormGenerator\obj\Debug\Views\PasoSPView.baml
